@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="jdutable",
-    version="0.1",
+    version="0.2",
     scripts=["bin/jdutable"],
     author="Jean Demeusy",
     author_email="dev.jdu@gmail.com",
