@@ -47,7 +47,7 @@ class TableWriter:
     def set_border(self, state: bool):
         self.border = state
 
-    def set_alignment(self, alignment: str):
+    def set_alignment(self, alignment: str or list[str]):
         def check_sign(sign: str):
             if sign in ["<", "left", "l"]:
                 return ["<"]
