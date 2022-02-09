@@ -2,5 +2,7 @@ venv/
 __pycache__/
 dist/
 jdutable.egg-info/
-main.py
 assets/
+
+
+main.py
