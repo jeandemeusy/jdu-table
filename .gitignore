@@ -3,3 +3,4 @@ __pycache__/
 dist/
 jdutable.egg-info/
 main.py
+assets/

@@ -1,4 +1,7 @@
+import csv
 import sys
+from pathlib import Path
+
 import numpy as np
 
 
@@ -68,6 +71,27 @@ class TableWriter:
 
     def set_column_separator(self, separator: str):
         self.column_separator = separator
+
+    def from_csv(
+        self, filename: Path, header: bool = False, footer: bool = False, sep: str = ","
+    ):
+        rows: list[str] = []
+
+        with open(filename, "r") as f:
+            csvreader = csv.reader(f, delimiter=sep)
+
+            rows = [row for row in csvreader]
+
+        if header:
+            self.set_header(rows[0])
+            rows = rows[1:]
+
+        if footer:
+            self.set_footer(rows[-1])
+            rows = rows[:-1]
+
+        for row in rows:
+            self.append(row)
 
     def format_title(self, text: str):
         if self.uppercased:
