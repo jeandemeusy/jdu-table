@@ -111,3 +111,47 @@ def reset_footer(self)
 def reset_content(self)
 ```
 ... to reset header, body, and footer to an empty list.
+
+### Example
+Let's use the following content, that is in file `assets/example.csv`:
+```csv
+Date, Description, Amout
+1/1/2014, Domain name, $10.98
+1/1/2014, January Hosting, $54.95
+1/4/2014, February Hosting, $51.00
+1/4/2014, February Extra Bandwidth, $30.00
+, Total, $146.93
+```
+
+Heres an example code to render this file:
+```python
+from pathlib import Path
+
+from jdutable import TableWriter
+
+table = TableWriter()
+
+table.from_csv(Path("assets/example.csv"), header=True, footer=True)
+
+table.set_uppercased(True)
+table.set_border(True)
+table.set_alignment(["left", "<", "r"])
+table.set_center_separator("-")
+table.set_column_separator("|")
+
+table.render()
+```
+
+This shows the following result in the command line:
+```console
+---------------------------------------------------
+! Date     ! Description               !    Amout !
+---------------------------------------------------
+! 1/1/2014 !  Domain name              !   $10.98 !
+! 1/1/2014 !  January Hosting          !   $54.95 !
+! 1/4/2014 !  February Hosting         !   $51.00 !
+! 1/4/2014 !  February Extra Bandwidth !   $30.00 !
+---------------------------------------------------
+              Total                       $146.93
+           ----------------------------------------
+```
