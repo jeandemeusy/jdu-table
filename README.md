@@ -133,7 +133,7 @@ table = TableWriter()
 
 table.from_csv(Path("assets/example.csv"), header=True, footer=True)
 
-table.set_uppercased(True)
+table.set_uppercased(False)
 table.set_border(True)
 table.set_alignment(["left", "<", "r"])
 table.set_center_separator("-")
