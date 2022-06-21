@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-
+from typing import List
 
 class TableWriter:
     """Class description."""
@@ -13,11 +13,11 @@ class TableWriter:
         Initialisation of the class.
         """
 
-        self.header: list[str] = []
-        self.footer: list[str] = []
-        self.body: list[list[str]] = []
+        self.header: List[str] = []
+        self.footer: List[str] = []
+        self.body: List[List[str]] = []
         self.border: bool = True
-        self.alignment: str or list[str] = ["<"]
+        self.alignment: str or List[str] = ["<"]
         self.uppercased: bool = False
         self.column_separator: str = "|"
         self.center_separator: str = "+"
@@ -38,16 +38,16 @@ class TableWriter:
     def set_uppercased(self, state: bool):
         self.uppercased = state
 
-    def set_header(self, header: list[str]):
+    def set_header(self, header: List[str]):
         self.header = header
 
-    def set_footer(self, footer: list[str]):
+    def set_footer(self, footer: List[str]):
         self.footer = footer
 
     def set_border(self, state: bool):
         self.border = state
 
-    def set_alignment(self, alignment: str or list[str]):
+    def set_alignment(self, alignment: str or List[str]):
         def check_sign(sign: str):
             if sign in ["<", "left", "l"]:
                 return ["<"]
@@ -75,7 +75,7 @@ class TableWriter:
     def from_csv(
         self, filename: Path, header: bool = False, footer: bool = False, sep: str = ","
     ):
-        rows: list[str] = []
+        rows: List[str] = []
 
         with open(filename, "r") as f:
             csvreader = csv.reader(f, delimiter=sep)
@@ -113,13 +113,13 @@ class TableWriter:
         self.reset_body()
         self.reset_footer()
 
-    def append(self, line: list[str]):
+    def append(self, line: List[str]):
         if self.column_count != 0 and len(line) != self.column_count:
             raise ValueError("Column count not consistant")
 
         self.body.append(line)
 
-    def append_bulk(self, data: list[list[str]]):
+    def append_bulk(self, data: List[List[str]]):
         for line in data:
             self.append(line)
 
